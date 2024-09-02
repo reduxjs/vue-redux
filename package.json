@@ -38,7 +38,6 @@
     ]
   },
   "devDependencies": {
-    "@solidjs/testing-library": "^0.8.9",
     "@tanstack/config": "^0.13.1",
     "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/user-event": "^14.5.2",
@@ -59,7 +58,6 @@
     "typescript51": "npm:typescript@5.1",
     "typescript52": "npm:typescript@5.2",
     "typescript53": "npm:typescript@5.3",
-    "vite": "^5.4.2",
     "vitest": "^2.0.5",
     "vue": "^3.3.4"
   }

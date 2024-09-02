@@ -50,12 +50,11 @@ export interface UseDispatch<
  * @returns {Function} A `useDispatch` composition bound to the specified context.
  */
 export function createDispatchComposition<
-  StateType = unknown,
   ActionType extends Action = UnknownAction,
 >() {
   const useDispatch = () => {
     const store = useStore()
-    return store.dispatch as AppDispatch
+    return store.dispatch
   }
 
   Object.assign(useDispatch, {

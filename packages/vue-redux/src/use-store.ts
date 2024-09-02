@@ -1,5 +1,6 @@
 import { inject } from 'vue'
-import { StoreSymbol } from './provide-store'
+import {  StoreSymbol } from './provide-store'
+import type {StoreContext} from './provide-store';
 import type { Action, Store } from 'redux'
 
 /**
@@ -73,7 +74,7 @@ export function createStoreComposition<
   ActionType extends Action = Action,
 >() {
   const useStore = () => {
-    const context = inject(StoreSymbol)
+    const context = inject(StoreSymbol) as StoreContext
     const { store } = context
     return store
   }
@@ -99,4 +100,4 @@ export function createStoreComposition<
  *   return <div>{store.getState()}</div>
  * }
  */
-export const useStore = /*#__PURE__*/ createStoreComposition()
+export const useStore = /* #__PURE__*/ createStoreComposition()

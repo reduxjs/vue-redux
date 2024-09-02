@@ -1,10 +1,10 @@
 import { inject, readonly, ref, toRaw, watch } from 'vue'
 import { StoreSymbol } from './provide-store'
-import type { StoreContext} from './provide-store';
-import type { DeepReadonly, Ref } from 'vue'
+import type { StoreContext } from './provide-store'
+import type { DeepReadonly, Ref, UnwrapNestedRefs , UnwrapRef} from 'vue'
 import type { EqualityFn } from './types'
 
-export interface UseSelectorOptions<Selected = unknown> {
+export interface UseSelectorOptions<Selected> {
   equalityFn?: EqualityFn<Selected>
 }
 
@@ -66,12 +66,12 @@ export interface UseSelector<StateType = unknown> {
  * @returns {Function} A `useSelector` composition bound to the specified context.
  */
 export function createSelectorComposition(): UseSelector {
-  const useSelector = <TState = unknown, Selected = unknown>(
+  const useSelector = <TState, Selected>(
     selector: (state: TState) => Selected,
-    equalityFnOrOptions?:
+    equalityFnOrOptions:
       | EqualityFn<Selected>
       | UseSelectorOptions<Selected> = {},
-  ): DeepReadonly<Ref<Selected>> => {
+  ): Readonly<Ref<DeepReadonly<UnwrapRef<Selected>>>> => {
     const reduxContext = inject(StoreSymbol) as StoreContext
 
     const { equalityFn = refEquality } =
@@ -81,18 +81,18 @@ export function createSelectorComposition(): UseSelector {
 
     const { store, subscription } = reduxContext
 
-    const selectedState = ref(selector(store.getState()))
+    const selectedState = ref(selector(store.getState() as TState))
 
     watch(
       () => store,
       (_, __, onCleanup) => {
         const unsubscribe = subscription.addNestedSub(() => {
-          const data = selector(store.getState())
-          if (equalityFn(toRaw(selectedState.value), data)) {
+          const data = selector(store.getState() as TState)
+          if (equalityFn(toRaw(selectedState.value) as Selected, data)) {
             return
           }
 
-          selectedState.value = data
+          selectedState.value = data as UnwrapRef<Selected>
         })
 
         onCleanup(() => {
