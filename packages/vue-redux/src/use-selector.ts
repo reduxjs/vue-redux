@@ -1,5 +1,6 @@
-import { inject, readonly, ref, watch } from 'vue'
+import { inject, readonly, ref, toRaw, watch } from 'vue'
 import { StoreSymbol } from './provide-store'
+import type { StoreContext} from './provide-store';
 import type { DeepReadonly, Ref } from 'vue'
 import type { EqualityFn } from './types'
 
@@ -67,24 +68,31 @@ export interface UseSelector<StateType = unknown> {
 export function createSelectorComposition(): UseSelector {
   const useSelector = <TState = unknown, Selected = unknown>(
     selector: (state: TState) => Selected,
-    equalityFnOrOptions?: EqualityFn<Selected> | UseSelectorOptions<Selected>,
+    equalityFnOrOptions?:
+      | EqualityFn<Selected>
+      | UseSelectorOptions<Selected> = {},
   ): DeepReadonly<Ref<Selected>> => {
-    const reduxContext = inject(StoreSymbol)
+    const reduxContext = inject(StoreSymbol) as StoreContext
 
-    // const { equalityFn = refEquality } =
-    //   typeof equalityFnOrOptions === 'function'
-    //     ? { equalityFn: equalityFnOrOptions }
-    //     : equalityFnOrOptions
+    const { equalityFn = refEquality } =
+      typeof equalityFnOrOptions === 'function'
+        ? { equalityFn: equalityFnOrOptions }
+        : equalityFnOrOptions
 
-    const { store } = reduxContext
+    const { store, subscription } = reduxContext
 
     const selectedState = ref(selector(store.getState()))
 
     watch(
       () => store,
       (_, __, onCleanup) => {
-        const unsubscribe = store.subscribe(() => {
-          selectedState.value = selector(store.getState())
+        const unsubscribe = subscription.addNestedSub(() => {
+          const data = selector(store.getState())
+          if (equalityFn(toRaw(selectedState.value), data)) {
+            return
+          }
+
+          selectedState.value = data
         })
 
         onCleanup(() => {

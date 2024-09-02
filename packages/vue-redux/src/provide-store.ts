@@ -15,6 +15,8 @@ export interface ProviderProps<
 
 export const StoreSymbol = Symbol('Store')
 
+export type StoreContext = ReturnType<typeof getStoreContext>
+
 export function getStoreContext<
   A extends Action<string> = UnknownAction,
   S = unknown,
