@@ -8,6 +8,7 @@ export default [
   {
     name: 'tanstack/temp',
     rules: {
+      '@stylistic/js/spaced-comment': 'off',
       '@typescript-eslint/array-type': 'off',
       '@typescript-eslint/method-signature-style': 'off',
       '@typescript-eslint/naming-convention': 'off',
