@@ -1,9 +1,22 @@
 <script setup lang="ts">
-import { useStore } from 'vue-redux'
+import { useSelector, useDispatch } from 'vue-redux'
+import { decrement, increment } from './store/counter-slice'
+import { RootState } from './store'
 
-const localStore = useStore()
+const count = useSelector((state: RootState) => state.counter.value)
+const dispatch = useDispatch()
 </script>
 
 <template>
-  <p>{{ JSON.stringify(localStore.getState()) }}</p>
+  <div>
+    <div>
+      <button aria-label="Increment value" @click="dispatch(increment())">
+        Increment
+      </button>
+      <span>{{ count }}</span>
+      <button aria-label="Decrement value" @click="dispatch(decrement())">
+        Decrement
+      </button>
+    </div>
+  </div>
 </template>

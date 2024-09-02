@@ -23,11 +23,6 @@ export function getStoreContext<
   subscription.onStateChange = subscription.notifyNestedSubs
   subscription.trySubscribe()
 
-  onScopeDispose(() => {
-    subscription.tryUnsubscribe()
-    subscription.onStateChange = undefined
-  })
-
   const context = {
     store,
     subscription,
@@ -41,6 +36,12 @@ export function provideStore<
   S = unknown,
 >(props: ProviderProps<A, S>) {
   const context = getStoreContext(props)
+
+  onScopeDispose(() => {
+    context.subscription.tryUnsubscribe()
+    context.subscription.onStateChange = undefined
+  })
+
   provide(StoreSymbol, context)
 }
 
