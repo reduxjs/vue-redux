@@ -1,5 +1,4 @@
-import { inject } from 'vue'
-import { StoreSymbol } from './provide-store'
+import { useStore } from './use-store'
 import type { Action, Dispatch, UnknownAction } from 'redux'
 
 /**
@@ -55,9 +54,7 @@ export function createDispatchComposition<
   ActionType extends Action = UnknownAction,
 >() {
   const useDispatch = () => {
-    const context = inject(StoreSymbol)
-    const { store } = context
-
+    const store = useStore()
     return store.dispatch as AppDispatch
   }
 
@@ -88,4 +85,4 @@ export function createDispatchComposition<
  *   )
  * }
  */
-export const useDispatch = /*#__PURE__*/ createDispatchComposition()
+export const useDispatch = /* #__PURE__*/ createDispatchComposition()
