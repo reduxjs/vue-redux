@@ -1,5 +1,6 @@
 import { onScopeDispose, provide } from 'vue'
 import { createSubscription } from './utils/Subscription'
+import type { Subscription } from './utils/Subscription'
 import type { App } from 'vue'
 import type { Action, Store, UnknownAction } from 'redux'
 
@@ -21,7 +22,7 @@ export function getStoreContext<
   A extends Action<string> = UnknownAction,
   S = unknown,
 >({ store }: ProviderProps<A, S>) {
-  const subscription = createSubscription(store)
+  const subscription = createSubscription(store) as Subscription
   subscription.onStateChange = subscription.notifyNestedSubs
   subscription.trySubscribe()
 

@@ -78,7 +78,7 @@ function createListenerCollection() {
 
 type ListenerCollection = ReturnType<typeof createListenerCollection>
 
-interface Subscription {
+export interface Subscription {
   addNestedSub: (listener: VoidFunc) => VoidFunc
   notifyNestedSubs: VoidFunc
   handleChangeWrapper: VoidFunc
