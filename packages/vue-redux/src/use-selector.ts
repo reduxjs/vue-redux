@@ -37,7 +37,7 @@ export interface UseSelector<StateType = unknown> {
   <TState extends StateType = StateType, Selected = unknown>(
     selector: (state: TState) => Selected,
     equalityFnOrOptions?: EqualityFn<Selected> | UseSelectorOptions<Selected>,
-  ): DeepReadonly<Ref<Selected>>
+  ): Readonly<Ref<DeepReadonly<UnwrapRef<Selected>>>>
 
   /**
    * Creates a "pre-typed" version of {@linkcode useSelector useSelector}

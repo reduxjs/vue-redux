@@ -36,8 +36,6 @@ export interface UseDispatch<
    * ```
    *
    * @template OverrideDispatchType - The specific type of the dispatch function.
-   *
-   * @since 9.1.0
    */
   withTypes: <
     OverrideDispatchType extends DispatchType,
