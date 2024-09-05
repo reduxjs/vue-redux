@@ -1,7 +1,10 @@
 # Vue Redux
 
-Unofficial Vue bindings for [Redux](https://github.com/reduxjs/redux).
+Official Vue bindings for [Redux](https://github.com/reduxjs/redux).
 Performant and flexible.
+
+> [!WARNING]
+> This package is in alpha and is rapidly developing.
 
 # Features
 

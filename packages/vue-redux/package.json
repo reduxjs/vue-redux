@@ -1,11 +1,16 @@
 {
-  "name": "vue-redux",
+  "name": "@reduxjs/vue-redux",
   "version": "0.0.1",
-  "description": "Unofficial Vue bindings for Redux",
+  "description": "Official Vue bindings for Redux",
+  "keywords": [
+    "vue",
+    "redux"
+  ],
   "license": "MIT",
+  "author": "Corbin Cruthcley <git@crutchcorn.dev> (https://github.com/crutchcorn)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/crutchcorn/vue-redux.git",
+    "url": "https://github.com/reduxjs/vue-redux.git",
     "directory": "packages/vue-form"
   },
   "scripts": {
@@ -54,7 +59,12 @@
     "vue": "^3.3.4"
   },
   "peerDependencies": {
-    "redux": "^5.0.1",
-    "vue": "^3.3.0"
+    "redux": "^5.0.0",
+    "vue": "^3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "redux": {
+      "optional": true
+    }
   }
 }

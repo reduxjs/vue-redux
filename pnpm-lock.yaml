@@ -8,9 +8,6 @@ importers:
 
   .:
     devDependencies:
-      '@solidjs/testing-library':
-        specifier: ^0.8.9
-        version: 0.8.9(@solidjs/router@0.13.0(solid-js@1.8.22))(solid-js@1.8.22)
       '@tanstack/config':
         specifier: ^0.13.1
         version: 0.13.1(@types/node@20.14.10)(esbuild@0.21.5)(eslint@9.9.1(jiti@1.21.6))(rollup@4.21.0)(typescript@5.4.2)(vite@5.4.2(@types/node@20.14.10)(less@4.2.0)(sass@1.72.0)(sugarss@4.0.1(postcss@8.4.43))(terser@5.29.1))
@@ -71,9 +68,6 @@ importers:
       typescript53:
         specifier: npm:typescript@5.3
         version: typescript@5.3.3
-      vite:
-        specifier: ^5.4.2
-        version: 5.4.2(@types/node@20.14.10)(less@4.2.0)(sass@1.72.0)(sugarss@4.0.1(postcss@8.4.43))(terser@5.29.1)
       vitest:
         specifier: ^2.0.5
         version: 2.0.5(@types/node@20.14.10)(jsdom@25.0.0)(less@4.2.0)(sass@1.72.0)(sugarss@4.0.1(postcss@8.4.43))(terser@5.29.1)
@@ -86,15 +80,15 @@ importers:
       '@reduxjs/toolkit':
         specifier: ^2.2.7
         version: 2.2.7(react@18.3.1)
+      '@reduxjs/vue-redux':
+        specifier: ^0.0.1
+        version: link:../../../packages/vue-redux
       redux:
         specifier: ^5.0.1
         version: 5.0.1
       vue:
         specifier: ^3.3.4
         version: 3.3.4
-      vue-redux:
-        specifier: ^0.0.1
-        version: link:../../../packages/vue-redux
     devDependencies:
       '@vitejs/plugin-vue':
         specifier: ^5.1.3
@@ -674,21 +668,6 @@ packages:
     resolution: {integrity: sha512-lGFf08pbkEac0NYgVf4hdANpAgApRjNByLXB+WBip3qj1iendOIyAwP2GKkKbQMNVy2r1xxDf0ssfWscoiC+Vw==}
     engines: {node: '>=8.10'}
     hasBin: true
-
-  '@solidjs/router@0.13.0':
-    resolution: {integrity: sha512-YHLbFv9J53+iG4yVrh0vVdYiyXPTk892UyZ1jiMPsUXn2dYkX4552N+8SjvlKWWsmNmYxaoefM6jZn1YtVIUUg==}
-    peerDependencies:
-      solid-js: ^1.8.6
-
-  '@solidjs/testing-library@0.8.9':
-    resolution: {integrity: sha512-gcjTSHwzXqy8roTrDgHTasRkrUcWjVm/7T7wjUI5WNm2BdUTTi296CorTiIGQVFZg2BVYuwtJOzzNn71Y/QQfg==}
-    engines: {node: '>= 14'}
-    peerDependencies:
-      '@solidjs/router': '>=0.9.0'
-      solid-js: '>=1.0.0'
-    peerDependenciesMeta:
-      '@solidjs/router':
-        optional: true
 
   '@stylistic/eslint-plugin-js@2.7.1':
     resolution: {integrity: sha512-4YgqaPhPV8nMAMWnRz+RB7S/CQh/ximISMj2QJ8HPveUzCqUBkeNV7iB4cggr4pkalcDCsIu0y4LhmrlS1yAgA==}
@@ -2882,16 +2861,6 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
-  seroval-plugins@1.1.0:
-    resolution: {integrity: sha512-KtcJg590L3X3dd7ixs6am4UGVcV69TyjYhHtanIdQJq4dy2OceWXmmvWrYx7oFDNe+LNdxdWd0I5BQXuV5fBhA==}
-    engines: {node: '>=10'}
-    peerDependencies:
-      seroval: ^1.0
-
-  seroval@1.1.0:
-    resolution: {integrity: sha512-74Wpe+hhPx4V8NFe00I2Fu9gTJopKoH5vE7nCqFzVgKOXV8AnN23T58K79QLYQotzGpH93UZ+UN2Y11j9huZJg==}
-    engines: {node: '>=10'}
-
   set-function-length@1.2.2:
     resolution: {integrity: sha512-pgRc4hJ4/sNjWCSS9AmnS40x3bNMDTknHgL5UaMBTMyJnU90EgWh1Rz+MC9eFu4BuN/UwZjKQuY/1v3rM7HMfg==}
     engines: {node: '>= 0.4'}
@@ -2973,9 +2942,6 @@ packages:
   smol-toml@1.1.4:
     resolution: {integrity: sha512-Y0OT8HezWsTNeEOSVxDnKOW/AyNXHQ4BwJNbAXlLTF5wWsBvrcHhIkE5Rf8kQMLmgf7nDX3PVOlgC6/Aiggu3Q==}
     engines: {node: '>= 18', pnpm: '>= 8'}
-
-  solid-js@1.8.22:
-    resolution: {integrity: sha512-VBzN5j+9Y4rqIKEnK301aBk+S7fvFSTs9ljg+YEdFxjNjH0hkjXPiQRcws9tE5fUzMznSS6KToL5hwMfHDgpLA==}
 
   source-map-js@1.2.0:
     resolution: {integrity: sha512-itJW8lvSA0TXEphiRoawsCksnlf8SyvmFzIhltqAHluXd88pkCd+cXJVHTDwdCr0IzwptSm035IHQktUu1QUMg==}
@@ -4038,18 +4004,6 @@ snapshots:
       commander: 4.1.1
       ignore: 5.3.1
       p-map: 4.0.0
-
-  '@solidjs/router@0.13.0(solid-js@1.8.22)':
-    dependencies:
-      solid-js: 1.8.22
-    optional: true
-
-  '@solidjs/testing-library@0.8.9(@solidjs/router@0.13.0(solid-js@1.8.22))(solid-js@1.8.22)':
-    dependencies:
-      '@testing-library/dom': 10.4.0
-      solid-js: 1.8.22
-    optionalDependencies:
-      '@solidjs/router': 0.13.0(solid-js@1.8.22)
 
   '@stylistic/eslint-plugin-js@2.7.1(eslint@9.9.1(jiti@1.21.6))':
     dependencies:
@@ -6505,12 +6459,6 @@ snapshots:
 
   semver@7.6.3: {}
 
-  seroval-plugins@1.1.0(seroval@1.1.0):
-    dependencies:
-      seroval: 1.1.0
-
-  seroval@1.1.0: {}
-
   set-function-length@1.2.2:
     dependencies:
       define-data-property: 1.1.4
@@ -6593,12 +6541,6 @@ snapshots:
       - supports-color
 
   smol-toml@1.1.4: {}
-
-  solid-js@1.8.22:
-    dependencies:
-      csstype: 3.1.3
-      seroval: 1.1.0
-      seroval-plugins: 1.1.0(seroval@1.1.0)
 
   source-map-js@1.2.0: {}
 

@@ -1,9 +1,9 @@
 {
-  "name": "root",
+  "name": "@reduxjs/vue-redux-root",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/crutchcorn/vue-redux.git"
+    "url": "https://github.com/reduxjs/vue-redux.git"
   },
   "packageManager": "pnpm@9.9.0",
   "type": "module",

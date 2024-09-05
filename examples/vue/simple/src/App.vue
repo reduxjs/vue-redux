@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useSelector, useDispatch } from 'vue-redux'
+import { useSelector, useDispatch } from '@reduxjs/vue-redux'
 import { decrement, increment } from './store/counter-slice'
 import { RootState } from './store'
 

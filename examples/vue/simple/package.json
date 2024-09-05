@@ -1,5 +1,5 @@
 {
-  "name": "vue-redux-demo-simple",
+  "name": "@reduxjs/vue-redux-demo-simple",
   "private": true,
   "type": "module",
   "scripts": {
@@ -10,7 +10,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "vue-redux": "^0.0.1",
+    "@reduxjs/vue-redux": "^0.0.1",
     "redux": "^5.0.1",
     "@reduxjs/toolkit": "^2.2.7",
     "vue": "^3.3.4"
