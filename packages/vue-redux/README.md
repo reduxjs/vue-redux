@@ -3,8 +3,8 @@
 Official Vue bindings for [Redux](https://github.com/reduxjs/redux).
 Performant and flexible.
 
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/reduxjs/vue-redux/test.yml?style=flat-square) [![npm version](https://img.shields.io/npm/v/@reduxjs/vue.svg?style=flat-square)](https://www.npmjs.com/package/@reduxjs/vue)
-[![npm downloads](https://img.shields.io/npm/dm/@reduxjs/vue.svg?style=flat-square)](https://www.npmjs.com/package/@reduxjs/vue)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/reduxjs/vue-redux/test.yml?style=flat-square) [![npm version](https://img.shields.io/npm/v/@reduxjs/vue-redux.svg?style=flat-square)](https://www.npmjs.com/package/@reduxjs/vue-redux)
+[![npm downloads](https://img.shields.io/npm/dm/@reduxjs/vue.svg?style=flat-square)](https://www.npmjs.com/package/@reduxjs/vue-redux)
 
 > [!WARNING]
 > This package is in alpha and is rapidly developing.
