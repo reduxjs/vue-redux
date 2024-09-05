@@ -1,7 +1,11 @@
-import { createStoreComposition, useStore as useDefaultStore } from './use-store'
+import { ContextKey } from '../provider/context'
+import {
+  createStoreComposition,
+  useStore as useDefaultStore,
+} from './use-store'
+import type { VueReduxContextValue } from '../provider/context';
 import type { Action, Dispatch, UnknownAction } from 'redux'
-import type {InjectionKey} from "vue";
-import {ContextKey, VueReduxContextValue} from "../provider/context";
+import type { InjectionKey } from 'vue'
 
 /**
  * Represents a custom composition that provides a dispatch function
@@ -53,7 +57,10 @@ export function createDispatchComposition<
   StateType = unknown,
   ActionType extends Action = UnknownAction,
 >(
-  context?: InjectionKey<VueReduxContextValue<StateType, ActionType> | null> = ContextKey,
+  context?: InjectionKey<VueReduxContextValue<
+    StateType,
+    ActionType
+  > | null> = ContextKey,
 ) {
   const useStore =
     context === ContextKey ? useDefaultStore : createStoreComposition(context)

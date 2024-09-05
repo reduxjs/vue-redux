@@ -11,7 +11,7 @@ await publish({
     {
       name: '@reduxjs/vue-redux',
       packageDir: 'packages/vue-redux',
-    }
+    },
   ],
   branchConfigs: {
     main: {

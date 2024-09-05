@@ -1,8 +1,10 @@
 import { onScopeDispose, provide } from 'vue'
+import { createSubscription } from '../utils/Subscription'
+import { ContextKey } from './context'
+import type { ProviderProps, VueReduxContextValue } from './context';
 import type { App, InjectionKey } from 'vue'
-import type {Action, Store, UnknownAction} from 'redux'
-import {ContextKey, ProviderProps, VueReduxContextValue} from "./context";
-import {createSubscription, Subscription} from "../utils/Subscription";
+import type { Action, Store, UnknownAction } from 'redux'
+import type { Subscription} from '../utils/Subscription';
 
 export interface ProviderProps<
   A extends Action<string> = UnknownAction,
@@ -22,11 +24,12 @@ export interface ProviderProps<
   context?: InjectionKey<VueReduxContextValue<S, A> | null>
 }
 
-
 export function getContext<
   A extends Action<string> = UnknownAction,
   S = unknown,
->({ store }: Pick<ProviderProps<A, S>, "store">): VueReduxContextValue<S, A> | null {
+>({
+  store,
+}: Pick<ProviderProps<A, S>, 'store'>): VueReduxContextValue<S, A> | null {
   const subscription = createSubscription(store) as Subscription
   subscription.onStateChange = subscription.notifyNestedSubs
   subscription.trySubscribe()
@@ -40,15 +43,15 @@ export function getContext<
 export function provideStore<
   A extends Action<string> = UnknownAction,
   S = unknown,
->({store, context}: ProviderProps<A, S>) {
-  const contextValue = getContext({store})
+>({ store, context }: ProviderProps<A, S>) {
+  const contextValue = getContext({ store })
 
   onScopeDispose(() => {
     contextValue.subscription.tryUnsubscribe()
     contextValue.subscription.onStateChange = undefined
   })
 
-  const providerKey = context || ContextKey;
+  const providerKey = context || ContextKey
 
   provide(providerKey, contextValue)
 }
@@ -56,10 +59,10 @@ export function provideStore<
 export function provideStoreToApp<
   A extends Action<string> = UnknownAction,
   S = unknown,
->(app: App, {store, context}: ProviderProps<A, S>) {
-  const contextValue = getContext({store})
+>(app: App, { store, context }: ProviderProps<A, S>) {
+  const contextValue = getContext({ store })
 
-  const providerKey = context || ContextKey;
+  const providerKey = context || ContextKey
 
   app.provide(providerKey, contextValue)
 }

@@ -1,7 +1,7 @@
-import {describe, test, expect} from "vitest";
-import type { Action, ThunkAction } from '@reduxjs/toolkit'
+import { describe, expect, test } from 'vitest'
 import { configureStore, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { useDispatch, useSelector, useStore } from '../src'
+import type { Action, ThunkAction } from '@reduxjs/toolkit'
 
 export interface CounterState {
   counter: number

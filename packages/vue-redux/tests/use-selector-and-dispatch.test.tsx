@@ -37,7 +37,7 @@ describe('Vue Redux', () => {
     const App = defineComponent(() => {
       provideStore({ store })
 
-      return () => <Comp/>
+      return () => <Comp />
     })
 
     const { getByText } = render(<App />)
@@ -70,9 +70,8 @@ describe('Vue Redux', () => {
     const App = defineComponent(() => {
       provideStore({ store })
 
-      return () => <Comp/>
+      return () => <Comp />
     })
-
 
     const { getByText } = render(<App />)
     const btn = getByText('Count: 0')

@@ -1,11 +1,8 @@
-import {describe, it, expect, vi} from "vitest";
-import {
-  createReduxContextComposition,
-  useReduxContext,
-} from '../src'
-import {defineComponent, h} from "vue";
-import type {InjectionKey} from "vue";
-import {render} from "@testing-library/vue";
+import { describe, expect, it, vi } from 'vitest'
+import { defineComponent, h } from 'vue'
+import { render } from '@testing-library/vue'
+import { createReduxContextComposition, useReduxContext } from '../src'
+import type { InjectionKey } from 'vue'
 
 describe('Vue', () => {
   describe('compositions', () => {
@@ -14,11 +11,11 @@ describe('Vue', () => {
         const spy = vi.spyOn(console, 'error').mockImplementation(() => {})
 
         const App = defineComponent(() => {
-          useReduxContext();
-          return () => null;
+          useReduxContext()
+          return () => null
         })
 
-        expect(() => render(<App/>)).toThrow(
+        expect(() => render(<App />)).toThrow(
           /could not find vue-redux context value/,
         )
         spy.mockRestore()
@@ -26,18 +23,19 @@ describe('Vue', () => {
     })
     describe('createReduxContextHook', () => {
       it('throws if component is not wrapped in provider', () => {
-        const customContext = Symbol.for("testing") as InjectionKey<VueReduxContextValue | null>;
-        const useCustomReduxContext = createReduxContextComposition(customContext)
+        const customContext = Symbol.for(
+          'testing',
+        ) as InjectionKey<VueReduxContextValue | null>
+        const useCustomReduxContext =
+          createReduxContextComposition(customContext)
         const spy = vi.spyOn(console, 'error').mockImplementation(() => {})
 
-
         const App = defineComponent(() => {
-          useCustomReduxContext();
-          return () => null;
+          useCustomReduxContext()
+          return () => null
         })
 
-
-        expect(() => render(<App/>)).toThrow(
+        expect(() => render(<App />)).toThrow(
           /could not find vue-redux context value/,
         )
 

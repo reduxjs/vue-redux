@@ -1,7 +1,7 @@
+import type { Subscription } from '../utils/Subscription'
 import type { Action, Store, UnknownAction } from 'redux'
-import {Subscription} from '../utils/Subscription'
 import type { ProviderProps } from './Provider'
-import {InjectionKey} from "vue";
+import type { InjectionKey } from 'vue'
 
 export interface VueReduxContextValue<
   SS = any,
@@ -11,4 +11,6 @@ export interface VueReduxContextValue<
   subscription: Subscription
 }
 
-export const ContextKey = Symbol.for(`vue-redux-context`) as InjectionKey<VueReduxContextValue>
+export const ContextKey = Symbol.for(
+  `vue-redux-context`,
+) as InjectionKey<VueReduxContextValue>

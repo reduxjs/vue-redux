@@ -36,12 +36,12 @@ The following Vue component works as-expected:
 
 ```vue
 <script setup lang="ts">
-  import { useSelector, useDispatch } from '@reduxjs/vue-redux'
-  import { decrement, increment } from './store/counter-slice'
-  import { RootState } from './store'
+import { useSelector, useDispatch } from '@reduxjs/vue-redux'
+import { decrement, increment } from './store/counter-slice'
+import { RootState } from './store'
 
-  const count = useSelector((state: RootState) => state.counter.value)
-  const dispatch = useDispatch()
+const count = useSelector((state: RootState) => state.counter.value)
+const dispatch = useDispatch()
 </script>
 
 <template>
