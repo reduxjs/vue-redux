@@ -1,8 +1,13 @@
-import { inject, readonly, ref, toRaw, watch } from 'vue'
+import {inject, type InjectionKey, readonly, ref, toRaw, watch} from 'vue'
 import { StoreSymbol } from './provide-store'
 import type { StoreContext } from './provide-store'
-import type { DeepReadonly, Ref, UnwrapNestedRefs , UnwrapRef} from 'vue'
+import type { DeepReadonly, Ref, UnwrapRef} from 'vue'
 import type { EqualityFn } from './types'
+import {ContextKey, VueReduxContextValue} from "../provider/context";
+import {
+  createReduxContextComposition,
+  useReduxContext as useDefaultReduxContext,
+} from './use-redux-context'
 
 export interface UseSelectorOptions<Selected> {
   equalityFn?: EqualityFn<Selected>
@@ -63,23 +68,31 @@ export interface UseSelector<StateType = unknown> {
 /**
  * Composition factory, which creates a `useSelector` composition bound to a given context.
  *
+ * @param {InjectionKey<VueReduxContextValue>} [context=StoreSymbol] Injection key passed to your `inject`.
  * @returns {Function} A `useSelector` composition bound to the specified context.
  */
-export function createSelectorComposition(): UseSelector {
+export function createSelectorComposition(
+  context?: InjectionKey<VueReduxContextValue<any, any> | null> = ContextKey,
+): UseSelector {
+  const useReduxContext =
+    context === ContextKey
+      ? useDefaultReduxContext
+      : createReduxContextComposition(context)
+
   const useSelector = <TState, Selected>(
     selector: (state: TState) => Selected,
     equalityFnOrOptions:
       | EqualityFn<Selected>
       | UseSelectorOptions<Selected> = {},
   ): Readonly<Ref<DeepReadonly<UnwrapRef<Selected>>>> => {
-    const reduxContext = inject(StoreSymbol) as StoreContext
-
     const { equalityFn = refEquality } =
       typeof equalityFnOrOptions === 'function'
         ? { equalityFn: equalityFnOrOptions }
         : equalityFnOrOptions
 
-    const { store, subscription } = reduxContext
+    const { store, subscription } = useReduxContext()
+
+    // TODO: Introduce wrappedSelector for debuggability
 
     const selectedState = ref(selector(store.getState() as TState))
 

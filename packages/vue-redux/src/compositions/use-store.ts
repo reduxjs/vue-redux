@@ -1,7 +1,11 @@
-import { inject } from 'vue'
-import {  StoreSymbol } from './provide-store'
-import type {StoreContext} from './provide-store';
+import {inject} from 'vue'
+import type {InjectionKey} from 'vue'
 import type { Action, Store } from 'redux'
+import {ContextKey, VueReduxContextValue} from "../provider/context";
+import {
+  createReduxContextComposition,
+  useReduxContext as useDefaultReduxContext,
+} from './use-redux-context'
 
 /**
  * Represents a type that extracts the action type from a given Redux store.
@@ -67,15 +71,22 @@ export interface UseStore<StoreType extends Store> {
 /**
  * Composition factory, which creates a `useStore` composition bound to a given context.
  *
+ * @param {InjectionKey<VueReduxContextValue>} [context=StoreSymbol] Injection key passed to your `inject`.
  * @returns {Function} A `useStore` composition bound to the specified context.
  */
 export function createStoreComposition<
   StateType = unknown,
   ActionType extends Action = Action,
->() {
+>(
+  context?: InjectionKey<VueReduxContextValue<StateType, ActionType> | null> = ContextKey,
+) {
+  const useReduxContext =
+    context === ContextKey
+      ? useDefaultReduxContext
+      : // @ts-ignore
+      createReduxContextComposition(context)
   const useStore = () => {
-    const context = inject(StoreSymbol) as StoreContext
-    const { store } = context
+    const { store } = useReduxContext()
     return store
   }
 
