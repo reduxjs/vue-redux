@@ -9,7 +9,7 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url))
 await publish({
   packages: [
     {
-      name: 'vue-redux',
+      name: '@reduxjs/vue-redux',
       packageDir: 'packages/vue-redux',
     }
   ],

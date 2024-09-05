@@ -69,7 +69,7 @@ export function createDispatchComposition<
  *
  * @example
  *
- * import { useDispatch } from 'vue-redux'
+ * import { useDispatch } from '@reduxjs/vue-redux'
  *
  * export const CounterComponent = ({ value }) => {
  *   const dispatch = useDispatch()

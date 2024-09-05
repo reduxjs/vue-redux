@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import { provideStoreToApp } from 'vue-redux'
+import { provideStoreToApp } from '@reduxjs/vue-redux'
 import { store } from './store'
 
 import App from './App.vue'

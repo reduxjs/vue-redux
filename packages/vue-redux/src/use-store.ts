@@ -93,7 +93,7 @@ export function createStoreComposition<
  *
  * @example
  *
- * import { useStore } from 'vue-redux'
+ * import { useStore } from '@reduxjs/vue-redux'
  *
  * export const ExampleComponent = () => {
  *   const store = useStore()

@@ -129,7 +129,7 @@ export function createSelectorComposition(): UseSelector {
  *
  * @example
  *
- * import { useSelector } from 'vue-redux'
+ * import { useSelector } from '@reduxjs/vue-redux'
  *
  * export const CounterComponent = () => {
  *   const counter = useSelector(state => state.counter)

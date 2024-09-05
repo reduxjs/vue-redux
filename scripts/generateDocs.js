@@ -7,7 +7,7 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url))
 /** @type {import('@tanstack/config/typedoc').Package[]} */
 const packages = [
   {
-    name: 'vue-redux',
+    name: '@reduxjs/vue-redux',
     entryPoints: [resolve(__dirname, '../packages/vue-redux/src/index.ts')],
     tsconfig: resolve(__dirname, '../packages/vue-redux/tsconfig.docs.json'),
     outputDir: resolve(__dirname, '../docs/reference')
