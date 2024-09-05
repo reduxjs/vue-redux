@@ -1,6 +1,6 @@
 {
   "name": "@reduxjs/vue-redux",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Official Vue bindings for Redux",
   "keywords": [
     "vue",
