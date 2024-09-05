@@ -57,7 +57,7 @@ export function createDispatchComposition<
   StateType = unknown,
   ActionType extends Action = UnknownAction,
 >(
-  context?: InjectionKey<VueReduxContextValue<
+  context: InjectionKey<VueReduxContextValue<
     StateType,
     ActionType
   > | null> = ContextKey,

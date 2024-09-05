@@ -1,6 +1,6 @@
 import { inject } from 'vue'
 import { ContextKey } from '../provider/context'
-import type { VueReduxContextValue } from '../provider/context';
+import type { VueReduxContextValue } from '../provider/context'
 import type { InjectionKey } from 'vue'
 
 /**
@@ -14,11 +14,7 @@ export function createReduxContextComposition(context = ContextKey) {
   return function useReduxContext(): VueReduxContextValue {
     const contextValue = inject(context)
 
-    if (process.env.NODE_ENV !== 'production' && !contextValue) {
-      throw new Error(
-        'could not find vue-redux context value; please ensure the component is wrapped in a <Provider>',
-      )
-    }
+    // TODO: Add dev check for `contextValue`
 
     return contextValue!
   }

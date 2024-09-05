@@ -79,7 +79,7 @@ export function createStoreComposition<
   StateType = unknown,
   ActionType extends Action = Action,
 >(
-  context?: InjectionKey<VueReduxContextValue<
+  context: InjectionKey<VueReduxContextValue<
     StateType,
     ActionType
   > | null> = ContextKey,
