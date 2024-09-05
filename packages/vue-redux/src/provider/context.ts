@@ -11,4 +11,4 @@ export interface VueReduxContextValue<
   subscription: Subscription
 }
 
-export const ContextKey = Symbol.for(`react-redux-context`) as InjectionKey<VueReduxContextValue>
+export const ContextKey = Symbol.for(`vue-redux-context`) as InjectionKey<VueReduxContextValue>
