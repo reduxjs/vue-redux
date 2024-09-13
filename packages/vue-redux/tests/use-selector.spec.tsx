@@ -3,9 +3,10 @@ import { defineComponent, h, inject, watchSyncEffect } from 'vue'
 import { createStore } from 'redux'
 import { cleanup, render, waitFor } from '@testing-library/vue'
 import { ContextKey, provideStore as provideMock, useSelector } from '../src'
+import type { Ref } from 'vue'
+import type { Subscription } from '../src/utils/Subscription'
 import type { TypedUseSelectorComposition } from '../src'
 import type { AnyAction, Store } from 'redux'
-import { Subscription } from '../src/utils/Subscription'
 
 describe('Vue', () => {
   describe('compositions', () => {
@@ -138,6 +139,87 @@ describe('Vue', () => {
           await waitFor(() =>
             expect(appSubscription!.getListeners().get().length).toBe(2),
           )
+        })
+
+        it('unsubscribes when the component is unmounted', async () => {
+          let appSubscription: Subscription | null = null
+
+          const Child = defineComponent(() => {
+            const count = useNormalSelector((s) => s.count)
+            return () => <div>{count.value}</div>
+          })
+
+          const Parent = defineComponent(() => {
+            const contextVal = inject(ContextKey)
+            appSubscription = contextVal && contextVal.subscription
+            const count = useNormalSelector((s) => s.count)
+            return () => (count.value === 0 ? <Child /> : null)
+          })
+
+          const App = defineComponent(() => {
+            provideMock({ store: normalStore })
+            return () => <Parent />
+          })
+
+          render(<App />)
+          // Parent + 1 child component
+          expect(appSubscription!.getListeners().get().length).toBe(2)
+
+          normalStore.dispatch({ type: '' })
+
+          // Parent component only
+          await waitFor(() =>
+            expect(appSubscription!.getListeners().get().length).toBe(1),
+          )
+        })
+
+        it('notices store updates between render and store subscription effect', async () => {
+          const Child = defineComponent(
+            (props: { count: Ref<number> }) => {
+              // console.log('Child rendering')
+              watchSyncEffect(() => {
+                // console.log('Child layoutEffect: ', props.count.value)
+                if (props.count.value === 0) {
+                  // console.log('Dispatching store update')
+                  normalStore.dispatch({ type: '' })
+                }
+              })
+              return () => null
+            },
+            {
+              props: ['count'],
+            },
+          )
+
+          const Comp = defineComponent(() => {
+            // console.log('Parent rendering, selecting state')
+            const count = useNormalSelector((s) => s.count)
+
+            watchSyncEffect(() => {
+              // console.log('Parent layoutEffect: ', count)
+              renderedItems.push(count.value)
+            })
+
+            return () => (
+              <div>
+                {count.value}
+                <Child count={count} />
+              </div>
+            )
+          })
+
+          const App = defineComponent(() => {
+            provideMock({ store: normalStore })
+            return () => <Comp />
+          })
+
+          // console.log('Starting initial render')
+          render(<App />)
+
+          // With `useSyncExternalStore`, we get three renders of `<Comp>`:
+          // 1) Initial render, count is 0
+          // 2) Render due to dispatch, still sync in the initial render's commit phase
+          expect(renderedItems).toEqual([0, 1])
         })
       })
     })

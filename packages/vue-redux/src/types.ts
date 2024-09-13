@@ -1,4 +1,5 @@
 import type { UseSelectorOptions } from './compositions/use-selector'
+import type { DeepReadonly, Ref, UnwrapRef } from 'vue'
 
 export type EqualityFn<T> = (a: T, b: T) => boolean
 
@@ -18,11 +19,11 @@ export interface TypedUseSelectorComposition<TState> {
   <TSelected>(
     selector: (state: TState) => TSelected,
     equalityFn?: EqualityFn<NoInfer<TSelected>>,
-  ): TSelected
+  ): Readonly<Ref<DeepReadonly<UnwrapRef<TSelected>>>>
   <Selected = unknown>(
     selector: (state: TState) => Selected,
     options?: UseSelectorOptions<Selected>,
-  ): Selected
+  ): Readonly<Ref<DeepReadonly<UnwrapRef<Selected>>>>
 }
 
 export type NoInfer<T> = [T][T extends any ? 0 : never]
