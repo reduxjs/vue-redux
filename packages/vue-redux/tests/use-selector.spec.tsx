@@ -119,7 +119,7 @@ describe('Vue', () => {
 
           const Parent = defineComponent(() => {
             const contextVal = inject(ContextKey)
-            appSubscription = contextVal && contextVal.subscription
+            appSubscription = contextVal ? contextVal.subscription : null
             const count = useNormalSelector((s) => s.count)
             return () => (count.value === 1 ? <Child /> : null)
           })
@@ -151,7 +151,7 @@ describe('Vue', () => {
 
           const Parent = defineComponent(() => {
             const contextVal = inject(ContextKey)
-            appSubscription = contextVal && contextVal.subscription
+            appSubscription = contextVal ? contextVal.subscription : null
             const count = useNormalSelector((s) => s.count)
             return () => (count.value === 0 ? <Child /> : null)
           })
