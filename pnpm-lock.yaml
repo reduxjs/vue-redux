@@ -81,7 +81,7 @@ importers:
         specifier: ^2.2.7
         version: 2.2.7(react@18.3.1)
       '@reduxjs/vue-redux':
-        specifier: ^0.0.1
+        specifier: ^0.1.0
         version: link:../../../packages/vue-redux
       redux:
         specifier: ^5.0.1

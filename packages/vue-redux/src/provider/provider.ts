@@ -1,10 +1,10 @@
 import { onScopeDispose, provide } from 'vue'
 import { createSubscription } from '../utils/Subscription'
 import { ContextKey } from './context'
-import type { VueReduxContextValue } from './context';
+import type { VueReduxContextValue } from './context'
 import type { App, InjectionKey } from 'vue'
 import type { Action, Store, UnknownAction } from 'redux'
-import type { Subscription} from '../utils/Subscription';
+import type { Subscription } from '../utils/Subscription'
 
 export interface ProviderProps<
   A extends Action<string> = UnknownAction,
@@ -27,9 +27,7 @@ export interface ProviderProps<
 export function getContext<
   A extends Action<string> = UnknownAction,
   S = unknown,
->({
-  store,
-}: Pick<ProviderProps<A, S>, 'store'>): VueReduxContextValue<S, A> {
+>({ store }: Pick<ProviderProps<A, S>, 'store'>): VueReduxContextValue<S, A> {
   const subscription = createSubscription(store) as Subscription
   subscription.onStateChange = subscription.notifyNestedSubs
   subscription.trySubscribe()

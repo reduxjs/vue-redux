@@ -3,7 +3,7 @@ import {
   createStoreComposition,
   useStore as useDefaultStore,
 } from './use-store'
-import type { VueReduxContextValue } from '../provider/context';
+import type { VueReduxContextValue } from '../provider/context'
 import type { Action, Dispatch, UnknownAction } from 'redux'
 import type { InjectionKey } from 'vue'
 

@@ -5,11 +5,10 @@ import { render } from '@testing-library/vue'
 import {
   createDispatchComposition,
   provideStore as provideMock,
-  useDispatch
+  useDispatch,
 } from '../src'
-import type {
-  VueReduxContextValue} from '../src';
-import type { InjectionKey } from 'vue';
+import type { VueReduxContextValue } from '../src'
+import type { InjectionKey } from 'vue'
 
 const store = createStore((c: number = 1): number => c + 1)
 const store2 = createStore((c: number = 1): number => c + 2)

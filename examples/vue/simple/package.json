@@ -10,7 +10,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "@reduxjs/vue-redux": "^0.0.1",
+    "@reduxjs/vue-redux": "^0.1.0",
     "redux": "^5.0.1",
     "@reduxjs/toolkit": "^2.2.7",
     "vue": "^3.3.4"
