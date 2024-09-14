@@ -1,8 +1,13 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { defineComponent, h, inject, watchSyncEffect } from 'vue'
+import { Fragment, defineComponent, h, inject, watchSyncEffect } from 'vue'
 import { createStore } from 'redux'
 import { cleanup, render, waitFor } from '@testing-library/vue'
-import { ContextKey, provideStore as provideMock, useSelector } from '../src'
+import {
+  ContextKey,
+  provideStore as provideMock,
+  shallowEqual,
+  useSelector,
+} from '../src'
 import type { Ref } from 'vue'
 import type { Subscription } from '../src/utils/Subscription'
 import type { TypedUseSelectorComposition } from '../src'
@@ -220,6 +225,86 @@ describe('Vue', () => {
           // 1) Initial render, count is 0
           // 2) Render due to dispatch, still sync in the initial render's commit phase
           expect(renderedItems).toEqual([0, 1])
+        })
+      })
+
+      describe('performance optimizations and bail-outs', () => {
+        it('defaults to ref-equality to prevent unnecessary updates', async () => {
+          const state = {}
+          const store = createStore(() => state)
+
+          const Comp = defineComponent(() => {
+            const value = useSelector((s) => s)
+            watchSyncEffect(() => {
+              renderedItems.push(value.value)
+            })
+            return () => <div />
+          })
+
+          const App = defineComponent(() => {
+            provideMock({ store })
+            return () => <Comp />
+          })
+
+          render(<App />)
+
+          expect(renderedItems.length).toBe(1)
+
+          store.dispatch({ type: '' })
+
+          await waitFor(() => expect(renderedItems.length).toBe(1))
+        })
+
+        it('allows other equality functions to prevent unnecessary updates', async () => {
+          interface StateType {
+            count: number
+            stable: {}
+          }
+          const store = createStore(
+            ({ count, stable }: StateType = { count: -1, stable: {} }) => ({
+              count: count + 1,
+              stable,
+            }),
+          )
+
+          const Comp = defineComponent(() => {
+            const value = useSelector(
+              (s: StateType) => Object.keys(s),
+              shallowEqual,
+            )
+            watchSyncEffect(() => {
+              renderedItems.push(value.value)
+            })
+            return () => <div />
+          })
+
+          const Comp2 = defineComponent(() => {
+            const value = useSelector((s: StateType) => Object.keys(s), {
+              equalityFn: shallowEqual,
+            })
+            watchSyncEffect(() => {
+              renderedItems.push(value.value)
+            })
+            return () => <div />
+          })
+
+          const App = defineComponent(() => {
+            provideMock({ store })
+            return () => (
+              <>
+                <Comp />
+                <Comp2 />
+              </>
+            )
+          })
+
+          render(<App />)
+
+          expect(renderedItems.length).toBe(2)
+
+          store.dispatch({ type: '' })
+
+          await waitFor(() => expect(renderedItems.length).toBe(2))
         })
       })
     })
