@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { Fragment, defineComponent, h, inject, watchSyncEffect } from 'vue'
+import { Fragment, defineComponent, h, inject, watchSyncEffect } from 'vue-demi'
 import { createStore } from 'redux'
 import { cleanup, render, waitFor } from '@testing-library/vue'
 import {
@@ -8,7 +8,7 @@ import {
   shallowEqual,
   useSelector,
 } from '../src'
-import type { Ref } from 'vue'
+import type { Ref } from 'vue-demi'
 import type { Subscription } from '../src/utils/Subscription'
 import type { TypedUseSelectorComposition } from '../src'
 import type { AnyAction, Store } from 'redux'

@@ -5,7 +5,7 @@ import {
 } from './use-store'
 import type { VueReduxContextValue } from '../provider/context'
 import type { Action, Dispatch, UnknownAction } from 'redux'
-import type { InjectionKey } from 'vue'
+import type { InjectionKey } from 'vue-demi'
 
 /**
  * Represents a custom composition that provides a dispatch function

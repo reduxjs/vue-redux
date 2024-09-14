@@ -1,6 +1,6 @@
 import type { Subscription } from '../utils/Subscription'
 import type { Action, Store, UnknownAction } from 'redux'
-import type { InjectionKey } from 'vue'
+import type { InjectionKey } from 'vue-demi'
 
 export interface VueReduxContextValue<
   SS = any,

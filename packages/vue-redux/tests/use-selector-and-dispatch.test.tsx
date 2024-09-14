@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { userEvent } from '@testing-library/user-event'
 import { render } from '@testing-library/vue'
-import { defineComponent, h } from 'vue'
+import { defineComponent, h } from 'vue-demi'
 import { configureStore, createSlice } from '@reduxjs/toolkit'
 import { provideStore, useDispatch, useSelector } from '../src'
 

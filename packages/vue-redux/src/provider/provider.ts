@@ -1,8 +1,8 @@
-import { onScopeDispose, provide } from 'vue'
+import { onScopeDispose, provide } from 'vue-demi'
 import { createSubscription } from '../utils/Subscription'
 import { ContextKey } from './context'
 import type { VueReduxContextValue } from './context'
-import type { App, InjectionKey } from 'vue'
+import type { App, InjectionKey } from 'vue-demi'
 import type { Action, Store, UnknownAction } from 'redux'
 import type { Subscription } from '../utils/Subscription'
 

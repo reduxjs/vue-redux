@@ -1,11 +1,11 @@
-import { inject } from 'vue'
+import { inject } from 'vue-demi'
 import { ContextKey } from '../provider/context'
 import {
   createReduxContextComposition,
   useReduxContext as useDefaultReduxContext,
 } from './use-redux-context'
 import type { VueReduxContextValue } from '../provider/context'
-import type { InjectionKey } from 'vue'
+import type { InjectionKey } from 'vue-demi'
 import type { Action, Store } from 'redux'
 
 /**

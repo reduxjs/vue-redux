@@ -16,7 +16,7 @@
   "scripts": {
     "clean": "rimraf ./dist && rimraf ./coverage",
     "test:eslint": "eslint ./src ./tests",
-    "test:types": "pnpm run \"/^test:types:ts[0-9]{2}$/\"",
+    "test:types": "vue-demi-switch 3 && pnpm run \"/^test:types:ts[0-9]{2}$/\"",
     "test:types:ts49": "node ../../node_modules/typescript49/lib/tsc.js -p tsconfig.legacy.json",
     "test:types:ts50": "node ../../node_modules/typescript50/lib/tsc.js",
     "test:types:ts51": "node ../../node_modules/typescript51/lib/tsc.js",
@@ -24,7 +24,10 @@
     "test:types:ts53": "node ../../node_modules/typescript53/lib/tsc.js",
     "test:types:ts54": "tsc",
     "fixme:test:lib": "pnpm run test:2 && pnpm run test:2.7 && pnpm run test:3",
-    "test:lib": "vitest",
+    "test:lib": "pnpm run test:lib:2 && pnpm run test:lib:2.7 && pnpm run test:lib:3",
+    "test:lib:2": "vue-demi-switch 2 vue2 && vitest",
+    "test:lib:2.7": "vue-demi-switch 2.7 vue2.7 && vitest",
+    "test:lib:3": "vue-demi-switch 3 && vitest",
     "test:lib:dev": "pnpm run test:lib --watch",
     "test:build": "publint --strict",
     "build": "vite build"
@@ -51,18 +54,29 @@
     "dist",
     "src"
   ],
+  "dependencies": {
+    "vue-demi": "^0.14.10"
+  },
   "devDependencies": {
-    "redux": "^5.0.1",
     "@reduxjs/toolkit": "^2.2.7",
+    "@testing-library/vue": "^8.1.0",
     "@vitejs/plugin-vue": "^5.1.3",
+    "@vue/composition-api": "1.7.2",
+    "redux": "^5.0.1",
     "vite": "^5.4.2",
-    "vue": "^3.3.4"
+    "vue": "^3.4.27",
+    "vue2": "npm:vue@2.6",
+    "vue2.7": "npm:vue@2.7"
   },
   "peerDependencies": {
+    "@vue/composition-api": "^1.1.2",
     "redux": "^5.0.0",
-    "vue": "^3.0.0"
+    "vue": "^2.6.0 || ^3.3.0"
   },
   "peerDependenciesMeta": {
+    "@vue/composition-api": {
+      "optional": true
+    },
     "redux": {
       "optional": true
     }

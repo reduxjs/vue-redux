@@ -1,5 +1,5 @@
 import type { UseSelectorOptions } from './compositions/use-selector'
-import type { DeepReadonly, Ref, UnwrapRef } from 'vue'
+import type { DeepReadonly, Ref, UnwrapRef } from 'vue-demi'
 
 export type EqualityFn<T> = (a: T, b: T) => boolean
 

@@ -1,7 +1,7 @@
-import { inject } from 'vue'
+import { inject } from 'vue-demi'
 import { ContextKey } from '../provider/context'
 import type { VueReduxContextValue } from '../provider/context'
-import type { InjectionKey } from 'vue'
+import type { InjectionKey } from 'vue-demi'
 
 /**
  * Composition factory, which creates a `useReduxContext` hook bound to a given context. This is a low-level

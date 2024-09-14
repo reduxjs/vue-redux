@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { defineComponent, h } from 'vue'
+import { defineComponent, h } from 'vue-demi'
 import { createStore } from 'redux'
 import { render } from '@testing-library/vue'
 import {
@@ -8,7 +8,7 @@ import {
   useDispatch,
 } from '../src'
 import type { VueReduxContextValue } from '../src'
-import type { InjectionKey } from 'vue'
+import type { InjectionKey } from 'vue-demi'
 
 const store = createStore((c: number = 1): number => c + 1)
 const store2 = createStore((c: number = 1): number => c + 2)

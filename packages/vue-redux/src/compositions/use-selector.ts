@@ -1,10 +1,10 @@
-import { readonly, ref, toRaw, watch } from 'vue'
+import { readonly, ref, toRaw, watch } from 'vue-demi'
 import { ContextKey } from '../provider/context'
 import {
   createReduxContextComposition,
   useReduxContext as useDefaultReduxContext,
 } from './use-redux-context'
-import type { DeepReadonly, InjectionKey, Ref, UnwrapRef } from 'vue'
+import type { DeepReadonly, InjectionKey, Ref, UnwrapRef } from 'vue-demi'
 import type { EqualityFn } from '../types'
 import type { VueReduxContextValue } from '../provider/context'
 

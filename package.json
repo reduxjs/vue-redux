@@ -41,7 +41,6 @@
     "@tanstack/config": "^0.13.1",
     "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/user-event": "^14.5.2",
-    "@testing-library/vue": "^8.1.0",
     "@types/node": "^20.14.10",
     "@vitest/coverage-istanbul": "^2.0.5",
     "eslint": "^9.9.1",
@@ -58,7 +57,6 @@
     "typescript51": "npm:typescript@5.1",
     "typescript52": "npm:typescript@5.2",
     "typescript53": "npm:typescript@5.3",
-    "vitest": "^2.0.5",
-    "vue": "^3.3.4"
+    "vitest": "^2.0.5"
   }
 }

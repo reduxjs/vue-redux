@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest'
-import { defineComponent, h } from 'vue'
+import { defineComponent, h } from 'vue-demi'
 import { render } from '@testing-library/vue'
 import { createReduxContextComposition, useReduxContext } from '../src'
 import type { VueReduxContextValue } from '../src'
-import type { InjectionKey } from 'vue'
+import type { InjectionKey } from 'vue-demi'
 
 describe('Vue', () => {
   describe('compositions', () => {
