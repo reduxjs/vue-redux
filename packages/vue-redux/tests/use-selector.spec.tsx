@@ -306,6 +306,89 @@ describe('Vue', () => {
 
           await waitFor(() => expect(renderedItems.length).toBe(2))
         })
+
+        it('calls selector exactly once on mount and on update', async () => {
+          interface StateType {
+            count: number
+          }
+          const store = createStore(({ count }: StateType = { count: 0 }) => ({
+            count: count + 1,
+          }))
+
+          const selector = vi.fn((s: StateType) => {
+            return s.count
+          })
+          const renderedItems: number[] = []
+
+          const Comp = defineComponent(() => {
+            const value = useSelector(selector)
+            watchSyncEffect(() => {
+              renderedItems.push(value.value)
+            })
+            return () => <div />
+          })
+
+          const App = defineComponent(() => {
+            provideMock({ store })
+            return () => <Comp />
+          })
+
+          render(<App />)
+
+          expect(selector).toHaveBeenCalledTimes(1)
+          expect(renderedItems.length).toEqual(1)
+
+          store.dispatch({ type: '' })
+
+          await waitFor(() => expect(selector).toHaveBeenCalledTimes(2))
+          expect(renderedItems.length).toEqual(2)
+        })
+
+        it('calls selector twice once on mount when state changes during render', async () => {
+          interface StateType {
+            count: number
+          }
+          const store = createStore(({ count }: StateType = { count: 0 }) => ({
+            count: count + 1,
+          }))
+
+          const selector = vi.fn((s: StateType) => {
+            return s.count
+          })
+          const renderedItems: number[] = []
+
+          const Child = defineComponent(() => {
+            watchSyncEffect(() => {
+              store.dispatch({ type: '', count: 1 })
+            })
+            return () => <div />
+          })
+
+          const Comp = defineComponent(() => {
+            const value = useSelector(selector)
+
+            watchSyncEffect(() => {
+              renderedItems.push(value.value)
+            })
+
+            return () => (
+              <div>
+                <Child />
+              </div>
+            )
+          })
+
+          const App = defineComponent(() => {
+            provideMock({ store })
+            return () => <Comp />
+          })
+
+          render(<App />)
+
+          // Selector first called on Comp mount, and then re-invoked after mount due to useLayoutEffect dispatching event
+          expect(selector).toHaveBeenCalledTimes(2)
+          expect(renderedItems.length).toEqual(2)
+        })
       })
     })
   })
