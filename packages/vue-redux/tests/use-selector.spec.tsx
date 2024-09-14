@@ -1,7 +1,13 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { Fragment, defineComponent, h, inject, watchSyncEffect } from 'vue-demi'
+import {
+  Fragment,
+  defineComponent,
+  h,
+  inject,
+  isVue2,
+  watchSyncEffect,
+} from 'vue-demi'
 import { createStore } from 'redux'
-import { cleanup, render, waitFor } from '@testing-library/vue'
 import {
   ContextKey,
   provideStore as provideMock,
@@ -12,6 +18,33 @@ import type { Ref } from 'vue-demi'
 import type { Subscription } from '../src/utils/Subscription'
 import type { TypedUseSelectorComposition } from '../src'
 import type { AnyAction, Store } from 'redux'
+import { Vue2, install, isVue2 } from 'vue-demi'
+
+let cleanup: any
+let render: any
+let waitFor: any
+beforeEach(async () => {
+  if (isVue2) {
+    install(Vue2)
+    const {
+      cleanup: cleanupLocal,
+      render: renderLocal,
+      waitFor: waitForLocal,
+    } = await import('@testing-library/vue2')
+    cleanup = cleanupLocal
+    render = renderLocal
+    waitFor = waitForLocal
+  } else {
+    const {
+      cleanup: cleanupLocal,
+      render: renderLocal,
+      waitFor: waitForLocal,
+    } = await import('@testing-library/vue')
+    cleanup = cleanupLocal
+    render = renderLocal
+    waitFor = waitForLocal
+  }
+})
 
 describe('Vue', () => {
   describe('compositions', () => {

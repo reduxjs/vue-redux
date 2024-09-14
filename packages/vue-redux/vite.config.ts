@@ -1,10 +1,9 @@
 import { defineConfig, mergeConfig } from 'vitest/config'
 import { tanstackViteConfig } from '@tanstack/config/vite'
-import vue from '@vitejs/plugin-vue'
 import packageJson from './package.json'
 
 const config = defineConfig({
-  plugins: [vue()],
+  plugins: [],
   test: {
     name: packageJson.name,
     dir: './tests',
@@ -17,6 +16,9 @@ const config = defineConfig({
   esbuild: {
     jsxFactory: 'h',
     jsxFragment: 'Fragment',
+  },
+  optimizeDeps: {
+    exclude: ['vue-demi'],
   },
 })
 
