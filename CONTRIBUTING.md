@@ -1,195 +1,69 @@
 # Contributing
 
-## Questions
+We are open to, and grateful for, any contributions made by the community. By contributing to Vue Redux, you agree to abide by the [code of conduct](https://github.com/reduxjs/vue-redux/blob/main/CODE_OF_CONDUCT.md).
 
-If you have questions about implementation details, help or support, then please use our dedicated community forum at [GitHub Discussions](https://github.com/TanStack/form/discussions) **PLEASE NOTE:** If you choose to instead open an issue for your question, your issue will be immediately closed and redirected to the forum.
+Please review the [Redux Style Guide](https://redux.js.org/style-guide/style-guide) in the Redux docs to keep track of our best practices.
 
-## Reporting Issues
+## Reporting Issues and Asking Questions
 
-If you have found what you think is a bug, please [file an issue](https://github.com/TanStack/form/issues/new/choose). **PLEASE NOTE:** Issues that are identified as implementation questions or non-issues will be immediately closed and redirected to [GitHub Discussions](https://github.com/TanStack/form/discussions)
+Before opening an issue, please search the [issue tracker](https://github.com/reduxjs/vue-redux/issues) to make sure your issue hasn't already been reported.
 
-## Suggesting new features
-
-If you are here to suggest a feature, first create an issue if it does not already exist. From there, we will discuss use-cases for the feature and then finally discuss how it could be implemented.
+Please ask any general and implementation specific questions on [Stack Overflow with a Redux tag](http://stackoverflow.com/questions/tagged/redux?sort=votes&pageSize=50) for support.
 
 ## Development
 
-If you have been assigned to fix an issue or develop a new feature, please follow these steps to get started:
+Visit the [Issue tracker](https://github.com/reduxjs/vue-redux/issues) to find a list of open issues that need attention.
 
-- Fork this repository.
-- Install dependencies by running `$ pnpm install`.
-  - We use [pnpm](https://pnpm.io/) v7 for package management.
-  - We use [nvm](https://github.com/nvm-sh/nvm) to manage node versions - please make sure to use the version mentioned in `.nvmrc`.
-- Run development server using `pnpm run watch`.
-- Implement your changes and tests to files in the `src/` directory and corresponding test files.
-- Document your changes in the appropriate doc page.
-- Git stage your required changes and commit (see below commit guidelines).
-- Submit PR for review.
+Fork, then clone the repo:
 
-### Editing the docs locally and previewing the changes
-
-The documentations for all the TanStack projects are hosted on [tanstack.com](https://tanstack.com), which is a Remix application (https://github.com/TanStack/tanstack.com). You need to run this app locally to preview your changes in the `TanStack/form` docs.
-
-> [!NOTE]
-> The Remix app fetches the doc pages from GitHub in production, and searches for them at `../form/docs` in development. Your local clone of `TanStack/form` needs to be in the same directory as the local clone of `TansStack/tanstack.com`.
-
-You can follow these steps to set up the docs for local development:
-
-1. Make a new directory called `tanstack`.
-
-```sh
-mkdir tanstack
+```
+git clone https://github.com/your-username/vue-redux.git
 ```
 
-2. Enter that directory and clone the [`TanStack/form`](https://github.com/TanStack/form) and [`TanStack/tanstack.com`](https://github.com/TanStack/tanstack.com) repos.
+This repository uses PNPM 9 to manage packages. Install dependencies with:
 
-```sh
-cd tanstack
-git clone git@github.com:TanStack/form.git
-# We probably don't need all the branches and commit history
-# from the `tanstack.com` repo, so let's just create a shallow
-# clone of the latest version of the `main` branch.
-# Read more about shallow clones here:
-# https://github.blog/2020-12-21-get-up-to-speed-with-partial-clone-and-shallow-clone/#user-content-shallow-clones
-git clone git@github.com:TanStack/tanstack.com.git --depth=1 --single-branch --branch=main
 ```
-
-> [!NOTE]
-> Your `tanstack` directory should look like this:
->
-> ```
-> tanstack/
->    |
->    +-- form/ (<-- this directory cannot be called anything else!)
->    |
->    +-- tanstack.com/
-> ```
-
-3. Enter the `tanstack/tanstack.com` directory, install the dependencies and run the app in dev mode:
-
-```sh
-cd tanstack.com
 pnpm i
-# The app will run on https://localhost:3000 by default
-pnpm dev
 ```
 
-4. Now you can visit http://localhost:3000/form/latest/docs/overview in the browser and see the changes you make in `tanstack/form/docs` there.
+### Building
 
-> [!WARNING]
-> You will need to update the `docs/config.json` file (in `TanStack/form`) if you add a new documentation page!
-
-You can see the whole process in the screen capture below:
-
-https://github.com/fulopkovacs/form/assets/43729152/9d35a3c3-8153-4e74-9cb2-af275f7a269b
-
-### Running examples
-
-- Make sure you've installed the dependencies by running `$ pnpm install` in the repo's root directory.
-- If you want to run the example against your local changes, run `pnpm run watch` in the repo's root directory. Otherwise, it will be run against the latest TanStack Form release.
-- Run `pnpm run dev` in the selected examples' directory.
-
-#### Note on `examples/react-native`
-
-React Native example requires Expo to work. Please follow the instructions from example's README.md file to learn more.
-
-#### Note on standalone execution
-
-If you want to run an example without installing dependencies for the whole repo, just follow instructions from the example's README.md file. It will be then run against the latest TanStack Form release.
-
-## Online one-click setup
-
-You can use Gitpod (An Online Open Source VS Code like IDE which is free for Open Source) for developing online. With a single click it will start a workspace and automatically:
-
-- clone the `TanStack/form` repo.
-- install all the dependencies in `/` and `/docs`.
-- run `npm start` in the root(`/`) to Auto-build files.
-- run `npm run dev` in `/docs`.
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/TanStack/form)
-
-## Commit message conventions
-
-`TanStack/form` is using [Angular Commit Message Conventions](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines).
-
-We have very precise rules over how our git commit messages can be formatted. This leads to **more readable messages** that are easy to follow when looking through the **project history**.
-
-### Commit Message Format
-
-Each commit message consists of a **header**, a **body** and a **footer**. The header has a special
-format that includes a **type**, a **scope** and a **subject**:
+Running the `build` task will create an ESM build.
 
 ```
-<type>(<scope>): <subject>
-<BLANK LINE>
-<body>
-<BLANK LINE>
-<footer>
+pnpm build
 ```
 
-The **header** is mandatory and the **scope** of the header is optional.
+### Testing and Linting
 
-Any line of the commit message cannot be longer than 100 characters! This allows the message to be easier to read on GitHub as well as in various git tools.
+To run the tests:
 
-### Type
+```
+pnpm test
+```
 
-Must be one of the following:
+### New Features
 
-- **feat**: A new feature
-- **fix**: A bug fix
-- **docs**: Documentation only changes
-- **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing
-  semi-colons, etc)
-- **refactor**: A code change that neither fixes a bug nor adds a feature
-- **perf**: A code change that improves performance
-- **test**: Adding missing or correcting existing tests
-- **chore**: Changes to the build process or auxiliary tools and libraries such as documentation
-  generation
+Please open an issue with a proposal for a new feature or refactoring before starting on the work. We don't want you to waste your efforts on a pull request that we won't want to accept.
 
-### Scope
+## Submitting Changes
 
-The scope could be anything specifying place of the commit change. For example `useForm`, `useMutation` etc...
+- Open a new issue in the [Issue tracker](https://github.com/reduxjs/vue-redux/issues).
+- Fork the repo.
+- Create a new feature branch based off the `main` branch.
+- Make sure all tests pass and there are no linting errors.
+- Submit a pull request, referencing any issues it addresses.
 
-You can use `*` when the change affects more than a single scope.
+Please try to keep your pull request focused in scope and avoid including unrelated commits.
 
-### Subject
+After you have submitted your pull request, we'll try to get back to you as soon as possible. We may suggest some changes or improvements.
 
-The subject contains succinct description of the change:
+Thank you for contributing!
 
-- use the imperative, present tense: "change" not "changed" nor "changes"
-- don't capitalize first letter
-- no dot (.) at the end
+# Cutting a release
 
-### Body
+If you are a maintainer and want to cut a release, follow these steps:
 
-Just as in the **subject**, use the imperative, present tense: "change" not "changed" nor "changes". The body should include the motivation for the change and contrast this with previous behavior.
-
-### Footer
-
-The footer should contain any information about **Breaking Changes** and is also the place to [reference GitHub issues that this commit closes](https://help.github.com/en/github/managing-your-work-on-github/linking-a-pull-request-to-an-issue).
-
-**Breaking Changes** should start with the word `BREAKING CHANGE:` with a space or two newlines. The rest of the commit message is then used for this.
-
-### Example
-
-Here is an example of the release type that will be done based on a commit messages:
-
-| Commit message                                                                                                                                                                                   | Release type               |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------- |
-| `fix(pencil): stop graphite breaking when too much pressure applied`                                                                                                                             | Patch Release              |
-| `feat(pencil): add 'graphiteWidth' option`                                                                                                                                                       | ~~Minor~~ Feature Release  |
-| `perf(pencil): remove graphiteWidth option`<br><br>`BREAKING CHANGE: The graphiteWidth option has been removed.`<br>`The default graphite width of 10mm is always used for performance reasons.` | ~~Major~~ Breaking Release |
-
-### Revert
-
-If the commit reverts a previous commit, it should begin with `revert:`, followed by the header of the reverted commit. In the body it should say: `This reverts commit <hash>.`, where the hash is the SHA of the commit being reverted.
-
-## Pull requests
-
-Maintainers merge pull requests by squashing all commits and editing the commit message if necessary using the GitHub user interface.
-
-Use an appropriate commit type. Be especially careful with breaking changes.
-
-## Releases
-
-For each new commit added to `main` with `git push` or by merging a pull request or merging from another branch, a GitHub action is triggered and runs the `semantic-release` command to make a release if there are codebase changes since the last release that affect the package functionalities.
+- `yarn build:all`
+- `cd packages && cd vue-redux`
+- `npm publish`

@@ -5,9 +5,7 @@ Performant and flexible.
 
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/reduxjs/vue-redux/test.yml?style=flat-square) [![npm version](https://img.shields.io/npm/v/@reduxjs/vue-redux.svg?style=flat-square)](https://www.npmjs.com/package/@reduxjs/vue-redux)
 [![npm downloads](https://img.shields.io/npm/dm/@reduxjs/vue.svg?style=flat-square)](https://www.npmjs.com/package/@reduxjs/vue-redux)
-
-> [!WARNING]
-> This package is in alpha and is rapidly developing.
+[![#redux channel on Discord](https://img.shields.io/badge/discord-redux@reactiflux-61DAFB.svg?style=flat-square)](http://www.reactiflux.com)
 
 ## Installation
 
@@ -30,31 +28,10 @@ with a module bundler like [Webpack](https://webpack.js.org/) or
 [Browserify](http://browserify.org/) to consume [CommonJS
 modules](https://webpack.js.org/api/module-methods/#commonjs).
 
-# Usage
+## Documentation
 
-The following Vue component works as-expected:
+The Vue Redux docs are published at **https://vue-redux.js.org** .
 
-```vue
-<script setup lang="ts">
-import { useSelector, useDispatch } from '@reduxjs/vue-redux'
-import { decrement, increment } from './store/counter-slice'
-import { RootState } from './store'
+## License
 
-const count = useSelector((state: RootState) => state.counter.value)
-const dispatch = useDispatch()
-</script>
-
-<template>
-  <div>
-    <div>
-      <button aria-label="Increment value" @click="dispatch(increment())">
-        Increment
-      </button>
-      <span>{{ count }}</span>
-      <button aria-label="Decrement value" @click="dispatch(decrement())">
-        Decrement
-      </button>
-    </div>
-  </div>
-</template>
-```
+[MIT](LICENSE.md)
