@@ -1,10 +1,10 @@
-import { readonly, ref, toRaw, watch } from 'vue'
+import { shallowReadonly, shallowRef, toRaw, watch } from 'vue'
 import { ContextKey } from '../provider/context'
 import {
   createReduxContextComposition,
   useReduxContext as useDefaultReduxContext,
 } from './use-redux-context'
-import type { DeepReadonly, InjectionKey, Ref, UnwrapRef } from 'vue'
+import type { InjectionKey, ShallowRef } from 'vue'
 import type { EqualityFn } from '../types'
 import type { VueReduxContextValue } from '../provider/context'
 
@@ -41,7 +41,7 @@ export interface UseSelector<StateType = unknown> {
   <TState extends StateType = StateType, Selected = unknown>(
     selector: (state: TState) => Selected,
     equalityFnOrOptions?: EqualityFn<Selected> | UseSelectorOptions<Selected>,
-  ): Readonly<Ref<DeepReadonly<UnwrapRef<Selected>>>>
+  ): Readonly<ShallowRef<Selected>>
 
   /**
    * Creates a "pre-typed" version of {@linkcode useSelector useSelector}
@@ -83,7 +83,7 @@ export function createSelectorComposition(
     equalityFnOrOptions:
       | EqualityFn<Selected>
       | UseSelectorOptions<Selected> = {},
-  ): Readonly<Ref<DeepReadonly<UnwrapRef<Selected>>>> => {
+  ): Readonly<ShallowRef<Selected>> => {
     const { equalityFn = refEquality } =
       typeof equalityFnOrOptions === 'function'
         ? { equalityFn: equalityFnOrOptions }
@@ -93,7 +93,7 @@ export function createSelectorComposition(
 
     // TODO: Introduce wrappedSelector for debuggability
 
-    const selectedState = ref(selector(store.getState() as TState))
+    const selectedState = shallowRef(selector(store.getState() as TState))
 
     watch(
       () => store,
@@ -104,7 +104,7 @@ export function createSelectorComposition(
             return
           }
 
-          selectedState.value = data as UnwrapRef<Selected>
+          selectedState.value = data
         })
 
         onCleanup(() => {
@@ -116,7 +116,7 @@ export function createSelectorComposition(
       },
     )
 
-    return readonly(selectedState)
+    return shallowReadonly(selectedState)
   }
 
   Object.assign(useSelector, {
