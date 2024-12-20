@@ -148,7 +148,7 @@ const initialState = {
 
 In component files, import the pre-typed compositions instead of the standard injectables from Vue-Redux.
 
-```vue title="features/counter/Counter.vue"
+```html title="features/counter/Counter.vue"
 <script setup>
   // highlight-next-line
   import { useAppSelector, useAppDispatch } from "app/injectables";

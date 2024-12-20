@@ -136,7 +136,7 @@ export default configureStore({
 
 Now we can use the Vue Redux compositions to let Vue components interact with the Redux store. We can read data from the store with `useSelector`, and dispatch actions using `useDispatch`. Create a `src/features/counter/counter.component.ts` file with a `<Counter>` component inside, then import that component into `App.vue` and render it inside of `<App>`.
 
-```vue title="features/counter/Counter.vue"
+```html title="features/counter/Counter.vue"
 <script setup>
   import { useSelector, useDispatch } from '@reduxjs/vue-redux'
   import { decrement, increment } from './counter-slice'

@@ -29,7 +29,9 @@
     "prettier:write": "pnpm run prettier --write",
     "docs:generate": "node scripts/generateDocs.js",
     "cipublish": "node scripts/publish.js",
-    "cipublishforce": "CI=true pnpm cipublish"
+    "cipublishforce": "CI=true pnpm cipublish",
+    "start:docs": "pnpm --filter website run start",
+    "build:docs": "pnpm --filter website run build"
   },
   "nx": {
     "includedScripts": [

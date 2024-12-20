@@ -54,7 +54,7 @@ Vue Redux provides a pair of custom Vue compositions that allow your Vue compone
 
 `useSelector` reads a value from the store state and subscribes to updates, while `useDispatch` returns the store's `dispatch` method to let you dispatch actions.
 
-```vue
+```html
 <script setup lang="ts">
 import { useSelector, useDispatch } from '@reduxjs/vue-redux'
 import { decrement, increment } from './store/counter-slice'
