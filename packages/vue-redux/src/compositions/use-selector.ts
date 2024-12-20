@@ -1,5 +1,6 @@
-import { shallowReadonly, shallowRef, toRaw, watch } from 'vue'
+import { shallowReadonly, watch } from 'vue'
 import { ContextKey } from '../provider/context'
+import { useTracklessShallowRefWithEqualityCheck } from '../utils/use-trackless-shallow-ref-with-equality-check'
 import {
   createReduxContextComposition,
   useReduxContext as useDefaultReduxContext,
@@ -93,18 +94,17 @@ export function createSelectorComposition(
 
     // TODO: Introduce wrappedSelector for debuggability
 
-    const selectedState = shallowRef(selector(store.getState() as TState))
+    const selectedState = useTracklessShallowRefWithEqualityCheck(
+      selector(store.getState() as TState),
+      equalityFn,
+    )
 
     watch(
       () => store,
       (_, __, onCleanup) => {
         const unsubscribe = subscription.addNestedSub(() => {
           const data = selector(store.getState() as TState)
-          if (equalityFn(toRaw(selectedState.value) as Selected, data)) {
-            return
-          }
-
-          selectedState.value = data
+          selectedState.ref.value = data
         })
 
         onCleanup(() => {
@@ -113,10 +113,11 @@ export function createSelectorComposition(
       },
       {
         immediate: true,
+        deep: false,
       },
     )
 
-    return shallowReadonly(selectedState)
+    return shallowReadonly(selectedState.ref)
   }
 
   Object.assign(useSelector, {
