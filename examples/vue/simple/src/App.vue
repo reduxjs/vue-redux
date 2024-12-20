@@ -2,9 +2,14 @@
 import { useSelector, useDispatch } from '@reduxjs/vue-redux'
 import { decrement, increment } from './store/counter-slice'
 import { RootState } from './store'
+import { watchEffect } from 'vue'
 
 const count = useSelector((state: RootState) => state.counter.value)
 const dispatch = useDispatch()
+
+watchEffect(() => {
+  dispatch(increment())
+})
 </script>
 
 <template>
