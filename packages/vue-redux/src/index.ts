@@ -1,5 +1,6 @@
 export * from './provider/provider'
 export * from './provider/context'
+export * from './plugin'
 export * from './compositions/use-store'
 export * from './compositions/use-dispatch'
 export * from './compositions/use-selector'
