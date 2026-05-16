@@ -32,9 +32,25 @@ Vue-Redux is written in TypeScript, so all types are automatically included.
 
 ## API Overview
 
+### `createVueReduxPlugin`
+
+Vue Redux provides a `createVueReduxPlugin` function that creates a Vue plugin to provide the Redux store to your app:
+
+```typescript
+import { createApp } from 'vue'
+import { createVueReduxPlugin } from '@reduxjs/vue-redux'
+import { store } from './store'
+
+import App from './App.vue'
+
+const app = createApp(App)
+app.use(createVueReduxPlugin({ store }))
+app.mount('#app')
+```
+
 ### `provideStoreToApp`
 
-Vue Redux includes a `provideStoreToApp` function, which makes the Redux store available to the rest of your app:
+Alternatively, you can use `provideStoreToApp` directly without the plugin pattern:
 
 ```typescript
 import { createApp } from 'vue'
